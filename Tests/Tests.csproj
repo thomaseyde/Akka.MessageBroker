@@ -60,6 +60,16 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AggregateLookups.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TestDomain\FirstCommand.cs" />
+    <Compile Include="TestDomain\FirstThingHappened.cs" />
+    <Compile Include="TestDomain\SecondCommand.cs" />
+    <Compile Include="TestDomain\SecondThingHappened.cs" />
+    <Compile Include="TestDomain\TestAggregate.cs" />
+    <Compile Include="TestDomain\TestHandler.cs" />
+    <Compile Include="TestDomain\TestHandlerFactory.cs" />
+    <Compile Include="Verify_single_command_handler_creation.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

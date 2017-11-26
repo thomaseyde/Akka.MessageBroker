@@ -63,6 +63,13 @@
     <Compile Include="EventSourcing\Aggregate.cs" />
     <Compile Include="EventSourcing\IRaiseEvents.cs" />
     <Compile Include="EventSourcing\IRestoreAggregate.cs" />
+    <Compile Include="Messaging\Commands\CommandHandlerFactory.cs" />
+    <Compile Include="Messaging\Commands\FactoryRegistrations.cs" />
+    <Compile Include="Messaging\Commands\FactoryResolvers.cs" />
+    <Compile Include="Messaging\Commands\IHandleCommand.cs" />
+    <Compile Include="Messaging\Commands\ILocateServices.cs" />
+    <Compile Include="Messaging\MessageBroker.cs" />
+    <Compile Include="Messaging\Unity\UnityServiceLocator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
