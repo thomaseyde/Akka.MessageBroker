@@ -60,6 +60,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EventSourcing\Aggregate.cs" />
+    <Compile Include="EventSourcing\IRaiseEvents.cs" />
+    <Compile Include="EventSourcing\IRestoreAggregate.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
