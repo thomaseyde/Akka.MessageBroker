@@ -1,9 +1,9 @@
 using Akka.Actor;
-using MessageBroker.Messaging.Commands;
+using MessageRouting.Routers;
+using MessageRouting.Routers.Resolvers;
+using Microsoft.Practices.Unity;
 using NUnit.Framework;
 using Tests.TestDomain;
-using Unity;
-using UnityServiceLocator = MessageBroker.Messaging.Unity.UnityServiceLocator;
 
 namespace Tests
 {
@@ -16,16 +16,14 @@ namespace Tests
             var container = new UnityContainer();
             var test = new TestAggregate();
             container
-                .RegisterCommandHandlerFactories<TestAggregate>()
-                .RegisterType<ILocateServices, UnityServiceLocator>()
+                .RegisterHandlerFactories<TestAggregate>()
                 .RegisterInstance(test);
 
             var system = ActorSystem.Create("test");
-            var broker = system.ActorOf(Props.Create(() => new MessageBroker.Messaging.MessageBroker(container.Resolve<ILocateServices>())),
-                "broker");
+            var router = system.ActorOf(Props.Create(() => new CommandRouter(container.Resolve<ILocateServices>())),"router");
 
-            broker.Tell(new FirstCommand());
-            broker.Tell(new FirstCommand());
+            router.Tell(new FirstCommand());
+            router.Tell(new FirstCommand());
 
             Assert.That(() => test.PublishedEvents<FirstThingHappened>(), Has.Count.EqualTo(2).After(500, 50));
         }
@@ -36,12 +34,11 @@ namespace Tests
             var container = new UnityContainer();
             var test = new TestAggregate();
             container
-                .RegisterCommandHandlerFactories<TestAggregate>()
-                .RegisterType<ILocateServices, UnityServiceLocator>()
+                .RegisterHandlerFactories<TestAggregate>()
                 .RegisterInstance(test);
 
             var system = ActorSystem.Create("test");
-            var broker = system.ActorOf(Props.Create(() => new MessageBroker.Messaging.MessageBroker(container.Resolve<ILocateServices>())),
+            var broker = system.ActorOf(Props.Create(() => new CommandRouter(container.Resolve<ILocateServices>())),
                 "broker");
 
             broker.Tell(new FirstCommand());

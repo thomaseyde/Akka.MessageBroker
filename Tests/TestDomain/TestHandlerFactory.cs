@@ -6,9 +6,9 @@ namespace Tests.TestDomain
 {
     [SuppressMessage("ReSharper", "UnusedMember.Global")]
     internal class TestHandlerFactory :
-        CommandHandlerFactory,
-        IHandleCommand<FirstCommand>,
-        IHandleCommand<SecondCommand>
+        HandlerFactory,
+        ForCommand<FirstCommand>,
+        ForCommand<SecondCommand>
     {
         public TestHandlerFactory(ILocateServices services) : base(services) { }
 
