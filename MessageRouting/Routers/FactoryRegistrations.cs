@@ -18,6 +18,11 @@ namespace MessageRouting.Routers
                 {
                     container.RegisterType(handler, type);
                 }
+                var eventHandler = type.GetInterfaces(typeof(ForEvent<>));
+                foreach (var handler in eventHandler)
+                {
+                    container.RegisterType(handler, type);
+                }
             }
 
             container.RegisterType<ILocateServices, UnityServiceLocator>();
