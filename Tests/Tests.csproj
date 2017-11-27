@@ -75,9 +75,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\MessageBroker\MessageBroker.csproj">
+    <ProjectReference Include="..\MessageRouting\MessageRouting.csproj">
       <Project>{681C0124-865A-4CF8-9E44-F01291FA6FB7}</Project>
-      <Name>MessageBroker</Name>
+      <Name>MessageRouting</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -1,6 +1,6 @@
 using System.Diagnostics.CodeAnalysis;
 using Akka.Actor;
-using MessageBroker.Messaging.Commands;
+using MessageRouting.Routers.Resolvers;
 
 namespace Tests.TestDomain
 {
