@@ -1,14 +1,14 @@
 using System.Diagnostics.CodeAnalysis;
 using Akka.Actor;
-using MessageBroker.Messaging.Commands;
+using MessageRouting.Routers.Resolvers;
 
 namespace Tests.TestDomain
 {
     [SuppressMessage("ReSharper", "UnusedMember.Global")]
     internal class TestHandlerFactory :
-        CommandHandlerFactory,
-        IHandleCommand<FirstCommand>,
-        IHandleCommand<SecondCommand>
+        HandlerFactory,
+        ForCommand<FirstCommand>,
+        ForCommand<SecondCommand>
     {
         public TestHandlerFactory(ILocateServices services) : base(services) { }
 

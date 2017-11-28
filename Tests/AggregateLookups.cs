@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
-using MessageBroker.EventSourcing;
+using Tests.EventSourcing;
 
 namespace Tests
 {

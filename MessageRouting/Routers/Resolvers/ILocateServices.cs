@@ -1,6 +1,6 @@
 using System;
 
-namespace MessageBroker.Messaging.Commands
+namespace MessageRouting.Routers.Resolvers
 {
     public interface ILocateServices
     {

@@ -1,6 +1,6 @@
 using System.Collections;
 
-namespace MessageBroker.EventSourcing
+namespace Tests.EventSourcing
 {
     public interface IRaiseEvents
     {

@@ -1,13 +1,13 @@
 using Akka.Actor;
 
-namespace MessageBroker.Messaging.Commands
+namespace MessageRouting.Routers.Resolvers
 {
-    public abstract class CommandHandlerFactory
+    public abstract class HandlerFactory
     {
         private Props props;
         private readonly ILocateServices services;
 
-        protected CommandHandlerFactory(ILocateServices services)
+        protected HandlerFactory(ILocateServices services)
         {
             this.services = services;
         }

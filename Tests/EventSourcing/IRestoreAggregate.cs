@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace MessageBroker.EventSourcing
+namespace Tests.EventSourcing
 {
     public interface IRestoreAggregate
     {

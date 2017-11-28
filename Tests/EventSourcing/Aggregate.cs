@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 
-namespace MessageBroker.EventSourcing
+namespace Tests.EventSourcing
 {
     public abstract class Aggregate : IRestoreAggregate, IRaiseEvents
     {

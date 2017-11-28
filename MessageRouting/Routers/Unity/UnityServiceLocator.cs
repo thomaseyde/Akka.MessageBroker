@@ -1,9 +1,9 @@
 using System;
 using System.Diagnostics.CodeAnalysis;
-using MessageBroker.Messaging.Commands;
-using Unity;
+using MessageRouting.Routers.Resolvers;
+using Microsoft.Practices.Unity;
 
-namespace MessageBroker.Messaging.Unity
+namespace MessageRouting.Routers.Unity
 {
     [SuppressMessage("ReSharper", "ClassNeverInstantiated.Global")]
     public class UnityServiceLocator : ILocateServices

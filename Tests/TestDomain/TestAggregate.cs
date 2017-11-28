@@ -1,4 +1,4 @@
-using MessageBroker.EventSourcing;
+using Tests.EventSourcing;
 
 namespace Tests.TestDomain
 {
