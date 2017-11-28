@@ -32,7 +32,7 @@ The handler factory also support events:
     public class ReminderIndexHandlerFactory :
         HandlerFactory,
         ForCommand<SendRegistrationReminders>,
-	ForEvent<RegistrationRemindersSent>
+        ForEvent<RegistrationRemindersSent>
     {
 		// ...
     }
