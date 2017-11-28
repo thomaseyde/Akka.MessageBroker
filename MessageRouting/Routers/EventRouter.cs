@@ -1,6 +1,8 @@
 using System.Diagnostics.CodeAnalysis;
+using System.Reflection;
 using Akka.Actor;
 using MessageRouting.Routers.Resolvers;
+using Microsoft.Practices.Unity;
 
 namespace MessageRouting.Routers
 {
@@ -31,7 +33,9 @@ namespace MessageRouting.Routers
 
         public static Props Create(IUnityContainer container)
         {
-            return Props.Create(() => new EventRouter(services));
+            var name = Assembly.GetCallingAssembly().FullName;
+            var child = container.Resolve<IUnityContainer>(name);
+            return Props.Create(() => new EventRouter(child));
         }
     }
 }
