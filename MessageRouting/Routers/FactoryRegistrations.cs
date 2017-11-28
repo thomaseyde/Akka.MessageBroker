@@ -9,7 +9,7 @@ namespace MessageRouting.Routers
 {
     public static class FactoryRegistrations
     {
-        public static IUnityContainer RegisterHandlerFactories<TAssembly>(this IUnityContainer container)
+        public static IUnityContainer RegisterHandlerFactoriesInAssembly<TAssembly>(this IUnityContainer container)
         {
             foreach (var type in typeof(TAssembly).Assembly.GetTypes())
             {
