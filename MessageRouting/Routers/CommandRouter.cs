@@ -5,21 +5,21 @@ namespace MessageRouting.Routers
 {
     public class CommandRouter : ReceiveActor
     {
-        public CommandRouter(ILocateServices services)
+        public CommandRouter(IUnityContainer container)
         {
-            var log = services.Resolve<ILogMessages>();
+            var log = container.Resolve<ILogMessages>();
 
             Receive<object>(message =>
             {
-                var handler = ResolveHandler(services, message);
+                var handler = ResolveHandler(container, message);
                 handler.Tell(message);
                 log.Message(message);
             });
         }
 
-        private static IActorRef ResolveHandler(ILocateServices services, object message)
+        private static IActorRef ResolveHandler(IUnityContainer container, object message)
         {
-            var factory = services.ResolveCommandHandlerFactory(message);
+            var factory = container.ResolveCommandHandlerFactory(message);
             var handler = Context.Child(factory.Name);
 
             return handler.Equals(Nobody.Instance)
@@ -27,7 +27,7 @@ namespace MessageRouting.Routers
                 : handler;
         }
 
-        public static Props Create(ILocateServices services)
+        public static Props Create(IUnityContainer container)
         {
             return Props.Create(() => new CommandRouter(services));
         }

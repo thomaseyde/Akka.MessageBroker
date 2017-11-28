@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using MessageRouting.Routers.Resolvers;
 using Microsoft.Practices.Unity;
-using UnityServiceLocator = MessageRouting.Routers.Unity.UnityServiceLocator;
 
 namespace MessageRouting.Routers
 {
@@ -25,7 +24,6 @@ namespace MessageRouting.Routers
                 }
             }
 
-            container.RegisterType<ILocateServices, UnityServiceLocator>();
             container.RegisterType<ILogMessages, NoLogging>();
             
             return container;
