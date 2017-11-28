@@ -15,8 +15,8 @@ Implement a command handler:
 Implement a command handler factory:
 
     public class ReminderIndexHandlerFactory :
-        CommandHandlerFactory,
-        IHandleCommand<SendReminderRegistrations>
+        HandlerFactory,
+        ForCommand<SendRegistrationReminders>
     {
         public ReminderIndexHandlerFactory(ILocateServices services) : base(services) { }
 
@@ -26,13 +26,30 @@ Implement a command handler factory:
             return Props.Create(() => new ReminderIndexHandler(reminders));
         }
     }
+	
+The handler factory also support events:
+
+    public class ReminderIndexHandlerFactory :
+        HandlerFactory,
+        ForCommand<SendRegistrationReminders>,
+		ForEvent<RegistrationRemindersSent>
+    {
+		// ...
+    }
 
 Register factories:
 
     var container = new UnityContainer();
-    container.RegisterCommandHandlerFactories<ReminderIndex>();
+    container.RegisterHandlerFactoriesInAssembly<ReminderIndex>();
 	
 Send a command:
 
-    var broker = system.ActorOf(Props.Create(() => new MessageBroker(container.Resolve<ILocateServices>())), "broker");
-	broker.Tell(new SendRegistrationReminders());
+	var system = ActorSystem.Create("system");
+	commandRouter = system.ActorOf(CommandRouter.Create(services), "command-router");
+	commandRouter.Tell(new SendRegistrationReminders());
+
+Publish an event:
+
+	var system = ActorSystem.Create("system");
+	eventRouter = system.ActorOf(EventRouter.Create(services), "event-router");
+	eventRouter.Tell(new RegistrationRemindersSent());
