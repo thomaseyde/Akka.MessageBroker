@@ -1,15 +1,16 @@
 using Akka.Actor;
+using Microsoft.Practices.Unity;
 
 namespace MessageRouting.Routers.Resolvers
 {
     public abstract class HandlerFactory
     {
         private Props props;
-        private readonly ILocateServices services;
+        private readonly IUnityContainer container;
 
-        protected HandlerFactory(ILocateServices services)
+        protected HandlerFactory(IUnityContainer container)
         {
-            this.services = services;
+            this.container = container;
         }
 
         public Props Props => props ?? (props = CreateProps());
@@ -17,7 +18,7 @@ namespace MessageRouting.Routers.Resolvers
 
         protected T Resolve<T>()
         {
-            return services.Resolve<T>();
+            return container.Resolve<T>();
         }
 
         protected abstract Props CreateProps();

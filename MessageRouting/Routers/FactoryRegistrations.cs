@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using MessageRouting.Routers.Resolvers;
 using Microsoft.Practices.Unity;
-using UnityServiceLocator = MessageRouting.Routers.Unity.UnityServiceLocator;
 
 namespace MessageRouting.Routers
 {
@@ -11,31 +10,38 @@ namespace MessageRouting.Routers
     {
         public static IUnityContainer RegisterHandlerFactoriesInAssembly<TAssembly>(this IUnityContainer container)
         {
-            foreach (var type in typeof(TAssembly).Assembly.GetTypes())
+            var assembly = typeof(TAssembly).Assembly;
+            var name = assembly.FullName;
+            container.RegisterInstance(typeof(IUnityContainer), name, container.CreateChildContainer());
+            var child = container.Resolve<IUnityContainer>(name);
+
+            foreach (var type in assembly.GetTypes())
             {
                 var commandHandler = type.GetInterfaces(typeof(ForCommand<>));
                 foreach (var handler in commandHandler)
                 {
-                    container.RegisterType(handler, type);
+                    child.RegisterType(handler, type);
                 }
                 var eventHandler = type.GetInterfaces(typeof(ForEvent<>));
                 foreach (var handler in eventHandler)
                 {
-                    container.RegisterType(handler, type);
+                    child.RegisterType(handler, type);
                 }
             }
 
-            container.RegisterType<ILocateServices, UnityServiceLocator>();
-            container.RegisterType<ILogMessages, NoLogging>();
-            
-            return container;
+            if (!child.IsRegistered(typeof(ILogMessages)))
+            {
+                child.RegisterType<ILogMessages, NoLogging>();
+            }
+
+            return child;
         }
 
         private static IEnumerable<Type> GetInterfaces(this Type type, Type specification)
         {
             return type.GetInterfaces()
-                .Where(t => t.IsGenericType)
-                .Where(t => t.GetGenericTypeDefinition() == specification);
+                       .Where(t => t.IsGenericType)
+                       .Where(t => t.GetGenericTypeDefinition() == specification);
         }
     }
 }
