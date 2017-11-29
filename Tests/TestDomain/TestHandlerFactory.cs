@@ -11,7 +11,7 @@ namespace Tests.TestDomain
         ForCommand<FirstCommand>,
         ForCommand<SecondCommand>
     {
-        public TestHandlerFactory(ILocateServices services) : base(services) { }
+        public TestHandlerFactory(IUnityContainer container) : base(container) { }
 
         protected override Props CreateProps()
         {

@@ -29,9 +29,9 @@ namespace MessageRouting.Routers
                 }
             }
 
-            if (!child.IsRegistered(typeof(ILogMessages)))
+            if (!container.IsRegistered(typeof(ILogMessages)))
             {
-                child.RegisterType<ILogMessages, NoLogging>();
+                container.RegisterType<ILogMessages, NoLogging>();
             }
 
             return child;

@@ -15,11 +15,11 @@ namespace Tests
             var container = new UnityContainer();
             var test = new TestAggregate();
             container
-                .RegisterHandlerFactories<TestAggregate>()
-                .RegisterInstance(test);
+                .RegisterInstance(test)
+                .RegisterHandlerFactoriesInAssembly<TestAggregate>();
 
             var system = ActorSystem.Create("test");
-            var router = system.ActorOf(Props.Create(() => new CommandRouter(container.Resolve<ILocateServices>())),"router");
+            var router = system.ActorOf(Props.Create(() => new CommandRouter(container)),"router");
 
             router.Tell(new FirstCommand());
             router.Tell(new FirstCommand());
@@ -33,11 +33,11 @@ namespace Tests
             var container = new UnityContainer();
             var test = new TestAggregate();
             container
-                .RegisterHandlerFactories<TestAggregate>()
+                .RegisterHandlerFactoriesInAssembly<TestAggregate>()
                 .RegisterInstance(test);
 
             var system = ActorSystem.Create("test");
-            var broker = system.ActorOf(Props.Create(() => new CommandRouter(container.Resolve<ILocateServices>())),
+            var broker = system.ActorOf(Props.Create(() => new CommandRouter(container)),
                 "broker");
 
             broker.Tell(new FirstCommand());
