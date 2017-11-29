@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using MessageRouting.Routers.Resolvers;
-using Microsoft.Practices.Unity;
+using Unity;
 
 namespace MessageRouting.Routers
 {
@@ -29,9 +29,9 @@ namespace MessageRouting.Routers
                 }
             }
 
-            if (!child.IsRegistered(typeof(ILogMessages)))
+            if (!container.IsRegistered(typeof(ILogMessages)))
             {
-                child.RegisterType<ILogMessages, NoLogging>();
+                container.RegisterType<ILogMessages, NoLogging>();
             }
 
             return child;

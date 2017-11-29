@@ -1,6 +1,7 @@
 using System.Diagnostics.CodeAnalysis;
 using Akka.Actor;
 using MessageRouting.Routers.Resolvers;
+using Unity;
 
 namespace Tests.TestDomain
 {
@@ -10,7 +11,7 @@ namespace Tests.TestDomain
         ForCommand<FirstCommand>,
         ForCommand<SecondCommand>
     {
-        public TestHandlerFactory(ILocateServices services) : base(services) { }
+        public TestHandlerFactory(IUnityContainer container) : base(container) { }
 
         protected override Props CreateProps()
         {
