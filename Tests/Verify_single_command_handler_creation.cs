@@ -1,9 +1,8 @@
 using Akka.Actor;
 using MessageRouting.Routers;
-using MessageRouting.Routers.Resolvers;
-using Microsoft.Practices.Unity;
 using NUnit.Framework;
 using Tests.TestDomain;
+using Unity;
 
 namespace Tests
 {
