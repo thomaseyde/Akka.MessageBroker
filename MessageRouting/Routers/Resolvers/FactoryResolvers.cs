@@ -8,16 +8,14 @@ namespace MessageRouting.Routers.Resolvers
         {
             var command = message.GetType();
             var handler = typeof(ForCommand<>).MakeGenericType(command);
-            var child = container.Resolve<IUnityContainer>(message.GetType().Assembly.FullName);
-            return (HandlerFactory) child.Resolve(handler);
+            return (HandlerFactory)container.Resolve(handler);
         }
 
         public static HandlerFactory ResolveEventHandlerFactory(this IUnityContainer container, object message)
         {
             var command = message.GetType();
             var handler = typeof(ForEvent<>).MakeGenericType(command);
-            var child = container.Resolve<IUnityContainer>(message.GetType().Assembly.FullName);
-            return (HandlerFactory) child.Resolve(handler);
+            return (HandlerFactory)container.Resolve(handler);
         }
     }
 }
