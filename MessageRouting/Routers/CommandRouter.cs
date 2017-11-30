@@ -1,7 +1,7 @@
 using System.Reflection;
 using Akka.Actor;
 using MessageRouting.Routers.Resolvers;
-using Unity;
+using Microsoft.Practices.Unity;
 
 namespace MessageRouting.Routers
 {
