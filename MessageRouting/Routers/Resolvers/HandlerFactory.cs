@@ -1,5 +1,5 @@
 using Akka.Actor;
-using Unity;
+using Microsoft.Practices.Unity;
 
 namespace MessageRouting.Routers.Resolvers
 {

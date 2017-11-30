@@ -1,12 +1,15 @@
+using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using Akka.Actor;
+using MessageRouting.Routers.Logging;
 using MessageRouting.Routers.Resolvers;
-using Unity;
+using Microsoft.Practices.Unity;
 
 namespace MessageRouting.Routers
 {
     public class CommandRouter : ReceiveActor
     {
+        [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
         public CommandRouter(IUnityContainer container)
         {
             var log = container.Resolve<ILogMessages>();
@@ -35,15 +38,5 @@ namespace MessageRouting.Routers
             var child = container.Resolve<IUnityContainer>(name);
             return Props.Create(() => new CommandRouter(child));
         }
-    }
-
-    public interface ILogMessages
-    {
-        void Message(object message);
-    }
-
-    internal class NoLogging : ILogMessages
-    {
-        public void Message(object message) { }
     }
 }
