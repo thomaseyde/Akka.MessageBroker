@@ -1,13 +1,15 @@
 using Akka.Actor;
+using MessageRouting.Dependencies;
 using MessageRouting.Routers;
 using NUnit.Framework;
-using Tests.TestDomain;
+using Tests.TestDomain.Events;
+using Tests.TestDomain.Tests;
 using Unity;
 
 namespace Tests
 {
     [TestFixture]
-    public class Verify_single_command_handler_creation
+    public class Verify_command_handler_creation
     {
         [Test]
         public void Single_command()
@@ -19,7 +21,7 @@ namespace Tests
                 .RegisterHandlerFactoriesInAssembly<TestAggregate>();
 
             var system = ActorSystem.Create("test");
-            var router = system.ActorOf(Props.Create(() => new CommandRouter(container)),"router");
+            var router = system.ActorOf(MessageRouter.Create<TestAggregate>(container),"router");
 
             router.Tell(new FirstCommand());
             router.Tell(new FirstCommand());
@@ -37,8 +39,7 @@ namespace Tests
                 .RegisterInstance(test);
 
             var system = ActorSystem.Create("test");
-            var broker = system.ActorOf(Props.Create(() => new CommandRouter(container)),
-                "broker");
+            var broker = system.ActorOf(MessageRouter.Create<TestAggregate>(container), "router");
 
             broker.Tell(new FirstCommand());
             broker.Tell(new SecondCommand());

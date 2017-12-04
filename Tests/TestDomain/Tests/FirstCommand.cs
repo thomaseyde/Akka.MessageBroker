@@ -1,4 +1,4 @@
-namespace Tests.TestDomain
+namespace Tests.TestDomain.Tests
 {
     public class FirstCommand { }
 }
