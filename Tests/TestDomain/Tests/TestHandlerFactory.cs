@@ -2,8 +2,8 @@ using System.Diagnostics.CodeAnalysis;
 using Akka.Actor;
 using MessageRouting.Logging;
 using MessageRouting.Routers;
+using Microsoft.Practices.Unity;
 using Tests.TestDomain.Events;
-using Unity;
 
 namespace Tests.TestDomain.Tests
 {

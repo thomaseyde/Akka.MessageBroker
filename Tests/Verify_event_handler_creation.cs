@@ -2,11 +2,11 @@ using System.Collections.Generic;
 using Akka.Actor;
 using MessageRouting.Dependencies;
 using MessageRouting.Routers;
+using Microsoft.Practices.Unity;
 using NUnit.Framework;
 using Tests.TestDomain.Events;
 using Tests.TestDomain.Loggers;
 using Tests.TestDomain.Tests;
-using Unity;
 
 namespace Tests
 {
