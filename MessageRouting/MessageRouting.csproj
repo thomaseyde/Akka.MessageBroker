@@ -68,8 +68,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Routers\Logging\ILogMessages.cs" />
-    <Compile Include="Routers\Logging\NoLogging.cs" />
     <Compile Include="Dependencies\DependencyResolver.cs" />
     <Compile Include="Dependencies\FactoryResolver.cs" />
     <Compile Include="Logging\ILogMessages.cs" />

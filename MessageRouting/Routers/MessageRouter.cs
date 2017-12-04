@@ -3,7 +3,7 @@ using System.Diagnostics.CodeAnalysis;
 using Akka.Actor;
 using MessageRouting.Dependencies;
 using MessageRouting.Logging;
-using Unity;
+using Microsoft.Practices.Unity;
 
 namespace MessageRouting.Routers
 {

@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using MessageRouting.Logging;
-using Unity;
+using Microsoft.Practices.Unity;
 
 namespace MessageRouting.Dependencies
 {
