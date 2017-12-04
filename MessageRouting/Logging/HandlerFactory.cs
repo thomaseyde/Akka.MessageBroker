@@ -1,7 +1,7 @@
 using Akka.Actor;
 using Microsoft.Practices.Unity;
 
-namespace MessageRouting.Routers.Resolvers
+namespace MessageRouting.Logging
 {
     public abstract class HandlerFactory
     {

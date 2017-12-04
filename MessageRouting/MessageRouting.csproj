@@ -77,11 +77,17 @@
     <Compile Include="Routers\Resolvers\FactoryResolvers.cs" />
     <Compile Include="Routers\Resolvers\ForCommand.cs" />
     <Compile Include="Routers\CommandRouter.cs" />
+    <Compile Include="Routers\Resolvers\HandlerFactory.cs" />
+    <Compile Include="Routers\EventRouter.cs" />
+    <Compile Include="Routers\CommandRouter.cs" />
     <Compile Include="Dependencies\DependencyResolver.cs" />
     <Compile Include="Dependencies\FactoryResolver.cs" />
     <Compile Include="Logging\ILogMessages.cs" />
     <Compile Include="Logging\NoLogging.cs" />
+    <Compile Include="Logging\HandlerFactory.cs" />
+    <Compile Include="Routers\ForEvent.cs" />
     <Compile Include="Dependencies\FactoryRegistrations.cs" />
+    <Compile Include="Routers\ForCommand.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
