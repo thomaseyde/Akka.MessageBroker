@@ -79,6 +79,8 @@
     <Compile Include="Routers\CommandRouter.cs" />
     <Compile Include="Dependencies\DependencyResolver.cs" />
     <Compile Include="Dependencies\FactoryResolver.cs" />
+    <Compile Include="Logging\ILogMessages.cs" />
+    <Compile Include="Logging\NoLogging.cs" />
     <Compile Include="Dependencies\FactoryRegistrations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
