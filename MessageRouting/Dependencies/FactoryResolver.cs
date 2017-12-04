@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using MessageRouting.Logging;
 using MessageRouting.Routers;
-using Unity;
+using Microsoft.Practices.Unity;
 
 namespace MessageRouting.Dependencies
 {
