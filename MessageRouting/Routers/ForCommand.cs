@@ -1,8 +1,8 @@
 using System.Diagnostics.CodeAnalysis;
 
-namespace MessageRouting.Routers.Resolvers
+namespace MessageRouting.Routers
 {
     [SuppressMessage("ReSharper", "UnusedTypeParameter")]
     [SuppressMessage("ReSharper", "InconsistentNaming")]
-    public interface ForEvent<TEvent> { }
+    public interface ForCommand<TCommand> { }
 }
