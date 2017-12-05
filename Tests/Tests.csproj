@@ -77,6 +77,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AggregateLookups.cs" />
+    <Compile Include="Map_handler_factory_types.cs" />
     <Compile Include="TestDomain\Loggers\TestLogger.cs" />
     <Compile Include="EventSourcing\Aggregate.cs" />
     <Compile Include="EventSourcing\IRaiseEvents.cs" />

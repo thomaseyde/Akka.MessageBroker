@@ -91,11 +91,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Dependencies\CommandHandlerFactoryMap.cs" />
     <Compile Include="Dependencies\DependencyResolver.cs" />
+    <Compile Include="Dependencies\EventHandlerFactoryMap.cs" />
     <Compile Include="Dependencies\FactoryResolver.cs" />
+    <Compile Include="Dependencies\ICreateHandler.cs" />
     <Compile Include="Logging\ILogMessages.cs" />
     <Compile Include="Logging\NoLogging.cs" />
-    <Compile Include="Logging\HandlerFactory.cs" />
+    <Compile Include="Dependencies\HandlerFactory.cs" />
     <Compile Include="Routers\ForEvent.cs" />
     <Compile Include="Dependencies\FactoryRegistrations.cs" />
     <Compile Include="Routers\ForCommand.cs" />

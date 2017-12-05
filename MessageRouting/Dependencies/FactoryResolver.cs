@@ -1,7 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
-using MessageRouting.Logging;
-using MessageRouting.Routers;
 using Microsoft.Practices.Unity;
 
 namespace MessageRouting.Dependencies
@@ -15,7 +12,7 @@ namespace MessageRouting.Dependencies
             this.container = container;
         }
 
-        public IEnumerable<HandlerFactory> HandlerFactories(object message)
+        public IEnumerable<ICreateHandler> HandlerFactories(object message)
         {
             var commandHandler = CommandHandler(message);
 
@@ -24,27 +21,24 @@ namespace MessageRouting.Dependencies
                 : new[] {commandHandler};
         }
 
-        private IEnumerable<HandlerFactory> EventHandlers(object message)
+        private IEnumerable<ICreateHandler> EventHandlers(object message)
         {
-            var @event = message.GetType();
-            var handler = typeof(ForEvent<>).MakeGenericType(@event);
+            var map = container.Resolve<EventHandlerFactoryMap>();
 
-            var handlers = container.ResolveAll(handler);
-
-            return handlers.OfType<HandlerFactory>();
+            foreach (var factory in map.FactoriesFor(message))
+            {
+                yield return (ICreateHandler) container.Resolve(factory);
+            }
         }
 
-        private HandlerFactory CommandHandler(object message)
+        private ICreateHandler CommandHandler(object message)
         {
-            var command = message.GetType();
-            var handler = typeof(ForCommand<>).MakeGenericType(command);
+            var map = container.Resolve<CommandHandlerFactoryMap>();
+            var handler = map.FactoryFor(message);
 
-            if (container.IsRegistered(handler))
-            {
-                return (HandlerFactory) container.Resolve(handler);
-            }
-
-            return null;
+            return handler != null 
+                ? (ICreateHandler) container.Resolve(handler) 
+                : null;
         }
     }
 }
