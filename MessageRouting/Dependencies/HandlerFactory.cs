@@ -1,9 +1,11 @@
+using System.Diagnostics.CodeAnalysis;
 using Akka.Actor;
 using Microsoft.Practices.Unity;
 
-namespace MessageRouting.Logging
+namespace MessageRouting.Dependencies
 {
-    public abstract class HandlerFactory
+    [SuppressMessage("ReSharper", "UnusedTypeParameter")]
+    public abstract class HandlerFactory<THandler> : ICreateHandler
     {
         private Props props;
         private readonly IUnityContainer container;

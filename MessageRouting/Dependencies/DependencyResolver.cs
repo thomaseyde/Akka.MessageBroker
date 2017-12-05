@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using MessageRouting.Logging;
+using Akka.Actor;
 using Microsoft.Practices.Unity;
 
 namespace MessageRouting.Dependencies
@@ -22,7 +22,7 @@ namespace MessageRouting.Dependencies
             return container.Resolve<T>();
         }
 
-        public IEnumerable<HandlerFactory> ResolveHandlerFactories(object message)
+        public IEnumerable<ICreateHandler> ResolveHandlerFactories(object message)
         {
             return factoryResolver.HandlerFactories(message);
         }
@@ -32,4 +32,5 @@ namespace MessageRouting.Dependencies
             return new DependencyResolver(container, typeof(TAssembly));
         }
     }
+
 }

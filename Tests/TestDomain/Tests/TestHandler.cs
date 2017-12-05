@@ -1,9 +1,15 @@
 using Akka.Actor;
+using MessageRouting.Routers;
 using Tests.TestDomain.Events;
 
 namespace Tests.TestDomain.Tests
 {
-    public class TestHandler : ReceiveActor
+    public class TestHandler : ReceiveActor,
+        ForCommand<FirstCommand>,
+        ForCommand<SecondCommand>,
+        ForEvent<FirstThingHappened>,
+        ForEvent<SecondThingHappened>,
+        ForEvent<ThirdThingHappened>
     {
         public TestHandler(TestAggregate test)
         {
