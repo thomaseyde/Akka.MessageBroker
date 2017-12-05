@@ -1,20 +1,12 @@
 using System.Diagnostics.CodeAnalysis;
 using Akka.Actor;
-using MessageRouting.Logging;
-using MessageRouting.Routers;
+using MessageRouting.Dependencies;
 using Microsoft.Practices.Unity;
-using Tests.TestDomain.Events;
 
 namespace Tests.TestDomain.Tests
 {
     [SuppressMessage("ReSharper", "UnusedMember.Global")]
-    internal class TestHandlerFactory :
-        HandlerFactory,
-        ForCommand<FirstCommand>,
-        ForCommand<SecondCommand>,
-        ForEvent<FirstThingHappened>,
-        ForEvent<SecondThingHappened>,
-        ForEvent<ThirdThingHappened>
+    internal class TestHandlerFactory : HandlerFactory<TestHandler>
     {
         public TestHandlerFactory(IUnityContainer container) : base(container) { }
 

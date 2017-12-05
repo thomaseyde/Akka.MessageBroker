@@ -32,7 +32,7 @@ namespace Tests
         }
 
         [Test]
-        public void Multiple_event()
+        public void Multiple_events()
         {
             var container = new UnityContainer();
             var log = new List<string>();
