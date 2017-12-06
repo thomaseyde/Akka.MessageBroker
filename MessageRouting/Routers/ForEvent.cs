@@ -2,7 +2,11 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace MessageRouting.Routers
 {
-    [SuppressMessage("ReSharper", "UnusedTypeParameter")]
     [SuppressMessage("ReSharper", "InconsistentNaming")]
-    public interface ForEvent<TEvent> { }
+    [SuppressMessage("ReSharper", "UnusedMember.Global")]
+    [SuppressMessage("ReSharper", "UnusedParameter.Global")]
+    public interface ForEvent<in TEvent>
+    {
+        void Apply(TEvent e);
+    }
 }

@@ -1,23 +1,24 @@
-using Akka.Actor;
 using MessageRouting.Routers;
 using Tests.TestDomain.Events;
 
 namespace Tests.TestDomain.Tests
 {
-    public class TestHandler : ReceiveActor,
+    public class TestHandler : HandlerActor,
         ForCommand<FirstCommand>,
         ForCommand<SecondCommand>,
         ForEvent<FirstThingHappened>,
         ForEvent<SecondThingHappened>,
         ForEvent<ThirdThingHappened>
     {
-        public TestHandler(TestAggregate test)
-        {
-            Receive<FirstCommand>(c => test.DoFirst());
-            Receive<SecondCommand>(c => test.DoSecond());
-            Receive<FirstThingHappened>(c => test.CompleteFirst());
-            Receive<SecondThingHappened>(c => test.CompleteSecond());
-            Receive<ThirdThingHappened>(c => test.CompleteThird());
-        }
+        private readonly TestAggregate test;
+
+        public TestHandler(TestAggregate test) => this.test = test;
+
+        public void Apply(FirstThingHappened e) => test.CompleteFirst();
+        public void Apply(SecondThingHappened e) => test.CompleteSecond();
+        public void Apply(ThirdThingHappened e) => test.CompleteThird();
+
+        public void Handle(FirstCommand c) => test.DoFirst();
+        public void Handle(SecondCommand c) => test.DoSecond();
     }
 }
