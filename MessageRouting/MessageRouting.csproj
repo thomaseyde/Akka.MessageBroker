@@ -102,6 +102,7 @@
     <Compile Include="Routers\ForEvent.cs" />
     <Compile Include="Dependencies\FactoryRegistrations.cs" />
     <Compile Include="Routers\ForCommand.cs" />
+    <Compile Include="Routers\HandlerActor.cs" />
     <Compile Include="Routers\MessageRouter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
