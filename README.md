@@ -4,19 +4,23 @@ A proof of concept of a self registering message broker for command handlers in 
 
 Implement a command handler:
 
-    public class ReminderIndexHandler : ReceiveActor
+    public class ReminderIndexHandler : HandlerActor,
+        ForCommand<SendRegistrationReminders>
     {
         public ReminderIndexHandler(ReminderIndex reminders)
         {
             Receive<SendRegistrationReminders>(command => reminders.Send());
         }
+
+        public void Handle(SendRegistrationReminders c) 
+        {
+            // ...
+        };
     }
 	
 Implement a command handler factory:
 
-    public class ReminderIndexHandlerFactory :
-        HandlerFactory,
-        ForCommand<SendRegistrationReminders>
+    public class ReminderIndexHandlerFactory : HandlerFactory<ReminderIndexHandler>
     {
         public ReminderIndexHandlerFactory(ILocateServices services) : base(services) { }
 
@@ -27,14 +31,18 @@ Implement a command handler factory:
         }
     }
 	
-The handler factory also support events:
+The handler also support events:
 
-    public class ReminderIndexHandlerFactory :
-        HandlerFactory,
-        ForCommand<SendRegistrationReminders>,
+    public class ReminderIndexHandler: HandlerActor,
+        // ...
         ForEvent<RegistrationRemindersSent>
     {
-		// ...
+        public void Apply(RegistrationRemindersSent e) 
+        {
+            // ...
+        }
+
+        // ...
     }
 
 Register factories:
@@ -42,14 +50,15 @@ Register factories:
     var container = new UnityContainer();
     container.RegisterHandlerFactoriesInAssembly<ReminderIndex>();
 	
+Create the router:
+
+	var system = ActorSystem.Create("system");
+	router = system.ActorOf(MessageRouter.Create(services), "router");
+
 Send a command:
 
-	var system = ActorSystem.Create("system");
-	commandRouter = system.ActorOf(CommandRouter.Create(services), "command-router");
-	commandRouter.Tell(new SendRegistrationReminders());
+	router.Tell(new SendRegistrationReminders());
 
-Publish an event:
+Or publish an event:
 
-	var system = ActorSystem.Create("system");
-	eventRouter = system.ActorOf(EventRouter.Create(services), "event-router");
-	eventRouter.Tell(new RegistrationRemindersSent());
+	router.Tell(new RegistrationRemindersSent());
